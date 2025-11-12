@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>桢桢公主的甜蜜小窝</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 淡紫色主题变量 */
+        :root {
+            --primary-purple: #e6e6fa;
+            --light-purple: #f0e6ff;
+            --medium-purple: #d8bfd8;
+            --dark-purple: #9370db;
+            --accent-pink: #ffb6c1;
+            --text-dark: #4a4a4a;
+            --white: #ffffff;
+            --shadow: rgba(146, 104, 190, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--light-purple) 0%, var(--primary-purple) 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .love-timer {
+            background: var(--white);
+            border-radius: 25px;
+            box-shadow: 0 15px 35px var(--shadow);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timer-title {
+            color: var(--dark-purple);
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .timer-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .timer-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--dark-purple);
+            line-height: 1;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 5px rgba(147, 112, 219, 0.2);
+        }
+
+        .timer-label {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .heart-decoration {
+            position: absolute;
+            color: var(--accent-pink);
+            font-size: 1.5rem;
+            opacity: 0.7;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .heart-1 { top: 20px; left: 30px; animation-delay: 0s; }
+        .heart-2 { top: 60px; right: 40px; animation-delay: 0.5s; }
+        .heart-3 { bottom: 50px; left: 50px; animation-delay: 1s; }
+        .heart-4 { bottom: 30px; right: 30px; animation-delay: 1.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 600px) {
+            .timer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            .timer-title {
+                font-size: 1.8rem;
+            }
+            .timer-number {
+                font-size: 2.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="love-timer">
+        <div class="heart-decoration heart-1">❤</div>
+        <div class="heart-decoration heart-2">❤</div>
+        <div class="heart-decoration heart-3">❤</div>
+        <div class="heart-decoration heart-4">❤</div>
+        
+        <h1 class="timer-title">我们已经在一起</h1>
+        
+        <div class="timer-grid">
+            <div class="timer-item">
+                <div class="timer-number" id="days">905</div>
+                <div class="timer-label">天</div>
+            </div>
+            <div class="timer-item">
+                <div class="timer-number" id="hours">17</div>
+                <div class="timer-label">时</div>
+            </div>
+            <div class="timer-item">
+                <div class="timer-number" id="minutes">37</div>
+                <div class="timer-label">分</div>
+            </div>
+            <div class="timer-item">
+                <div class="timer-number" id="seconds">56</div>
+                <div class="timer-label">秒</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 设置开始日期（请修改为你们的纪念日）
+        const startDate = new Date('2021-09-01');
+        
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        updateTimer();
+        setInterval(updateTimer, 1000);
+    </script>
+</body>
+</html>
